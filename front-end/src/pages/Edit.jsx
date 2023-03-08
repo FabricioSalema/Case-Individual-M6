@@ -5,54 +5,56 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const Edit = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Obtém o id do produto a partir dos parâmetros da rota
-  const [produto, setProduto] = useState({
+  const { id } = useParams(); // Obtém o id do game a partir dos parâmetros da rota
+  const [game, setGame] = useState({
     id: id,
-    name: "",
-    description: "",
+    title: "",
+    parental_guidance: 0,
     price: 0
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:5656/produto/${id}`).then((res) => {
+    axios.get(`http://localhost:5656/game/${id}`).then((res) => {
       console.log(res.data);
-      setProduto(res.data);
+      setGame(res.data);
     });
   }, [id]);
 
   const handleSubmit = async (e) => {
-    await axios.post(`http://localhost:5656/produto/update`, produto);
+    await axios.post(`http://localhost:5656/game/update`, game);
     navigate('/home');
     // Lógica para lidar com o resultado da requisição de atualização
   };
 
   return (
     <div className="container mt-5">
-      <h1>Editar Produto</h1>
+      <h1>Editar Game</h1>
       <form>
         <div className="form-group">
-          <label className='fw-bold m-2 ' htmlFor="nome">Nome</label>
+          <label className='fw-bold m-2 ' htmlFor="title">Título do game</label>
           <input
             type="text"
             className="form-control"
-            id="nome"
-            name="name"
-            value={produto.name}
-            onChange={(e) => setProduto({ ...produto, name: e.target.value })}
+            id="title"
+            name="title"
+            value={game.title}
+            onChange={(e) => setGame({ ...game, title: e.target.value })}
           />
         </div>
         <div className="form-group">
-          <label className='fw-bold m-2 ' htmlFor="descricao">Descrição</label>
-          <textarea
+          <label className='fw-bold m-2 ' htmlFor="pg">Classificação indicativa</label>
+          <input
             className="form-control"
-            id="descricao"
-            name="descricao"
+            id="pg"
+            name="pg"
             rows="3"
-            value={produto.description}
+            type="number"
+            step="0.01"
+            value={game.parental_guidance}
             onChange={(e) =>
-              setProduto({ ...produto, description: e.target.value })
+              setGame({ ...game, parental_guidance: e.target.value })
             }
-          ></textarea>
+          ></input>
         </div>
         <div className="form-group">
           <label className='fw-bold m-2 ' htmlFor="preco">Preço</label>
@@ -62,8 +64,8 @@ const Edit = () => {
             id="preco"
             name="preco"
             step="0.01"
-            value={produto.price}
-            onChange={(e) => setProduto({ ...produto, price: e.target.value })}
+            value={game.price}
+            onChange={(e) => setGame({ ...game, price: e.target.value })}
           />
         </div>
         <div className='mt-2' >

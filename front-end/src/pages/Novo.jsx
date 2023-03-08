@@ -2,33 +2,32 @@ import React from 'react'
 import axios from "axios";
 
 const Novo = () => {
-  let [name, setName] = React.useState('');
-  let [description, setDescription] = React.useState('');
+  let [title, setTitle] = React.useState('');
+  let [parental_guidance, setPG] = React.useState(0);
   let [price, setPrice] = React.useState(0);
 
-  let produto = {
-    name,
-    description,
+  let game = {
+    title,
+    parental_guidance,
     price
   }
-  console.log(produto);
+  console.log(game);
 
   const handleSubmit = () => {
-    axios.post('http://localhost:5656/produto', produto)
+    axios.post('http://localhost:5656/game', game)
   }
-
 
   return (
     <div className="container text-center mt-5">
-      <h1>Cadastrar produto</h1>
+      <h1>Cadastrar game</h1>
       <form >
         <div className="form-floating mb-3">
-          <input onChange={(e) => { setName(e.target.value) }} type="text" className="form-control" name="name" id="name" aria-describedby="nome" />
-          <label className='fw-bold' >Nome</label>
+          <input onChange={(e) => { setTitle(e.target.value) }} type="text" className="form-control" name="title" id="title" aria-describedby="title" />
+          <label className='fw-bold' >Título do game</label>
         </div>
         <div className="form-floating mb-3">
-          <textarea onChange={(e) => { setDescription(e.target.value) }} type="text" className="form-control" id="description" name="description" rows="3"></textarea>
-          <label className='fw-bold'  >Descrição</label>
+          <input onChange={(e) => { setPG(e.target.value) }} type="number" maxlength="2" className="form-control" id="pg" name="pg" rows="3"></input>
+          <label className='fw-bold'  >Classificação indicativa</label>
         </div>
         <div className="form-floating mb-3">
           <input onChange={(e) => { setPrice(e.target.value) }} type="number" step="any" className="form-control" id="price" name="price" />
@@ -41,4 +40,4 @@ const Novo = () => {
   )
 }
 
-export default Novo
+export default Novo;

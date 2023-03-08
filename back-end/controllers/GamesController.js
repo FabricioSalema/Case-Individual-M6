@@ -33,10 +33,10 @@ class GamesController {
 
   async updateGame(req, res) {
     try {
-      const { id, title, pg, price } = req.body;
+      const { id, title, parental_guidance, price } = req.body;
       const game = await gamesDb.update({
         title: title,
-        parental_guidance: pg,
+        parental_guidance: parental_guidance,
         price: price
       }, { where: { id: id } })
       return res.json(game)

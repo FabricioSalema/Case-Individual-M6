@@ -15,7 +15,7 @@ Games.init({
     allowNull: false
   },
   parental_guidance: {
-    type: DataTypes.INTEGER(2),
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   price: {
