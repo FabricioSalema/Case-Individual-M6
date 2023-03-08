@@ -30,5 +30,6 @@ npm install axios
 npm install react-router-dom
 npm run dev
 ```
+## :warning: O update da classificação indicativa ainda apresenta erros, por tanto ele AINDA não atualiza.
 
 <img src="./listaGames.png"/>
